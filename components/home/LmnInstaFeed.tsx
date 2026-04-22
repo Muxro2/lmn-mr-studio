@@ -3,10 +3,10 @@ import Image from 'next/image';
 
 const POSTS = [
 	{ img: '/posts/butterScoop.png', likes: 284, handle: 'lovemynatural.selfcare', initial: 'L', avatarStyle: undefined as React.CSSProperties | undefined, time: '2d', caption: 'My hair has never felt this moisturised 😭✨ the #hairbutter is something else fr' },
-	{ img: '/posts/hair.png', likes: 412, handle: 'lovemynatural.selfcare', initial: 'L', avatarStyle: undefined as React.CSSProperties | undefined, time: '4d', caption: 'New batch just dropped 🌿 Hair Oil restocked — get yours before it sells out again #lovemynatural' },
+	{ img: '/posts/hair-2.png', likes: 412, handle: 'lovemynatural.selfcare', initial: 'L', avatarStyle: undefined as React.CSSProperties | undefined, time: '4d', caption: 'New batch just dropped 🌿 Hair Oil restocked — get yours before it sells out again #lovemynatural' },
 	{ img: '/posts/butterShelf.png', likes: 197, handle: 'knatural_hair',          initial: 'K', avatarStyle: { background: 'linear-gradient(135deg,#C27B1A,#E8A020)' } as React.CSSProperties, time: '1w', caption: 'Obsessed with @lovemynatural.selfcare 🙌 length retention is actually real this time' },
-	{ img: '/posts/insta-4.png', likes: 339, handle: 'lovemynatural.selfcare', initial: 'L', avatarStyle: undefined as React.CSSProperties | undefined, time: '1w', caption: 'Catch us at Brixton this weekend 📍 come smell test everything in person 😍 #brixton' },
-	{ img: '/posts/insta-5.png', likes: 521, handle: 'afro.anika',             initial: 'A', avatarStyle: { background: 'linear-gradient(135deg,#8B4513,#C27B1A)' } as React.CSSProperties, time: '2w', caption: "Can't believe the difference after 3 weeks using the oil. No more breakage!! @lovemynatural.selfcare 🙏🏾" },
+	{ img: '/posts/hair.png', likes: 339, handle: 'lovemynatural.selfcare', initial: 'L', avatarStyle: undefined as React.CSSProperties | undefined, time: '1w', caption: 'Catch us at Brixton this weekend 📍 come smell test everything in person 😍 #brixton' },
+	{ img: '/posts/butterOutdoor.png', likes: 521, handle: 'afro.anika',             initial: 'A', avatarStyle: { background: 'linear-gradient(135deg,#8B4513,#C27B1A)' } as React.CSSProperties, time: '2w', caption: "Can't believe the difference after 3 weeks using the oil. No more breakage!! @lovemynatural.selfcare 🙏🏾" },
 ]
 
 export default function LmnInstaFeed() {
