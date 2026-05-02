@@ -3,6 +3,7 @@ import Image from 'next/image'
 
 const PRODUCTS = [
 	{
+		slug: 'hair-oil',
 		name: ['Hair', 'Oil'], sub: 'Growth & Moisture', vol: '120ml', price: '£12',
 		img: '/products/hairOil.png', alt: 'Hair Oil – Growth & Moisture',
 		benefits: ['Soothes dry, itchy scalp', 'Reduces breakage', 'Boosts hair growth', 'Lightweight, non-greasy'],
@@ -10,6 +11,7 @@ const PRODUCTS = [
 		imgHeight: 'h-[320px]',
 	},
 	{
+		slug: 'hair-butter',
 		name: ['Hair', 'Butter'], sub: 'Length & Retention', vol: '250ml', price: '£14',
 		img: '/products/hairButter.png', alt: 'Hair Butter – Length & Retention',
 		benefits: ['Softens & smooths', 'No greasy feeling', 'Organic herbs & butters', 'Seals in moisture'],
@@ -58,8 +60,8 @@ export default function LmnProducts() {
 								</li>
 							))}
 						</ul>
-						<Link href="#order" className="block w-full bg-[#C27B1A] text-white text-[10px] font-bold tracking-[0.12em] uppercase py-[13px] rounded-full text-center no-underline">
-							Order Now
+						<Link href={`/products/${p.slug}`} className="block w-full bg-[#C27B1A] text-white text-[10px] font-bold tracking-[0.12em] uppercase py-[13px] rounded-full text-center no-underline">
+							View Product
 						</Link>
 					</div>
 
