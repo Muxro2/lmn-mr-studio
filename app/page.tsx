@@ -9,7 +9,6 @@ import LmnProducts from '@/components/home/LmnProducts'
 import LmnGallery from '@/components/home/LmnGallery'
 import LmnOrder from '@/components/home/LmnOrder'
 import LmnInstaFeed from '@/components/home/LmnInstaFeed'
-import LmnSocial from '@/components/home/LmnSocial'
 import LmnFooter from '@/components/home/LmnFooter'
 
 export default function Page() {
@@ -35,7 +34,6 @@ export default function Page() {
       <LmnGallery />
       <LmnOrder />
       <LmnInstaFeed />
-      <LmnSocial />
       <LmnFooter />
     </main>
   )

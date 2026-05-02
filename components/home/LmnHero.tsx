@@ -30,7 +30,9 @@ export default function LmnHero() {
 					<Link href="#products" className="w-[50%] bg-white text-[#C27B1A] text-[11px] font-bold tracking-[0.1em] uppercase py-3.5 rounded-full text-center no-underline">
 						Shop the Range
 					</Link>
-					
+					<Link href="/stall" className="w-[50%] bg-white/20 border border-white/30 text-white text-[11px] font-bold tracking-[0.1em] uppercase py-3.5 rounded-full text-center no-underline">
+						Find our Stall
+					</Link>
 				</div>
 			</div>
 		</section>

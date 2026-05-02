@@ -2,13 +2,16 @@
 
 import { useEffect, useRef } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useCartStore } from '@/store/cartStore'
 import LmnCartDrawer from '@/components/CartDrawer'
 
 export default function LmnNav() {
 	const ref = useRef<HTMLElement>(null)
+	const pathname = usePathname()
+	const isHome = pathname === '/'
 	const totalItems = useCartStore((s) => s.totalItems())
-	const { drawerOpen, setDrawerOpen } = useCartStore()
+	const { setDrawerOpen } = useCartStore()
 
 	useEffect(() => {
 		const fn = () => {
@@ -20,18 +23,28 @@ export default function LmnNav() {
 		return () => window.removeEventListener('scroll', fn)
 	}, [])
 
+	const handleShopClick = () => {
+		if (totalItems > 0) {
+			setDrawerOpen(true)
+		} else if (isHome) {
+			document.querySelector('#products')?.scrollIntoView({ behavior: 'smooth' })
+		} else {
+			window.location.href = '/#products'
+		}
+	}
+
 	return (
 		<>
 			<nav ref={ref} className="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] z-[200] flex justify-between items-center px-5 py-3.5 transition-all duration-300">
-				<div className="font-[family-name:var(--font-fraunces)] font-black text-[13px] text-[#2A1800] tracking-[0.04em] uppercase leading-tight">
+				<Link href="/" className="font-[family-name:var(--font-fraunces)] font-black text-[13px] text-[#2A1800] tracking-[0.04em] uppercase leading-tight no-underline">
 					Love My Natural
 					<small className="block font-[family-name:var(--font-syne)] text-[8px] font-semibold tracking-[0.28em] uppercase text-[#C27B1A] not-italic">
 						Self Care
 					</small>
-				</div>
+				</Link>
 
 				<button
-					onClick={() => totalItems > 0 ? setDrawerOpen(true) : document.querySelector('#order')?.scrollIntoView({ behavior: 'smooth' })}
+					onClick={handleShopClick}
 					className="flex items-center gap-2 bg-[#E8A020] text-white font-[family-name:var(--font-syne)] text-[10px] font-bold tracking-[0.14em] uppercase px-4 py-2.5 rounded-full transition-all duration-300"
 				>
 					{totalItems > 0 ? 'Basket' : 'Shop Now'}

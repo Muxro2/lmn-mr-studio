@@ -34,37 +34,16 @@ export default function LmnOrder() {
 				</Link>
 
 				{/* Brixton Stall */}
-				<div className="flex items-center gap-3.5 py-[18px] border-b border-white/20">
+				<Link href="/stall" className="flex items-center gap-3.5 py-4.5 border-b border-white/20 no-underline">
 					<span className="font-[family-name:var(--font-fraunces)] italic text-[12px] text-white/35 w-[22px] shrink-0">03</span>
 					<div className="w-[42px] h-[42px] rounded-full bg-white/[0.18] flex items-center justify-center text-[18px] shrink-0">🏪</div>
 					<div>
 						<div className="text-[15px] font-bold text-white mb-0.5">Brixton Stall</div>
 						<div className="text-[11px] text-white/60">Come see us in person</div>
 					</div>
-					<span className="ml-auto text-white/50 text-[18px]">↓</span>
-				</div>
+					<span className="ml-auto text-white/50 text-[18px]">→</span>
+				</Link>
 
-			</div>
-
-			{/* Stall info card */}
-			<div className="lmn-rev mt-7 bg-white/[0.15] border border-white/25 rounded-[10px] p-[22px] relative overflow-hidden z-[1]">
-				<div aria-hidden className="absolute -bottom-3 -right-1.5 font-[family-name:var(--font-fraunces)] font-black italic text-[56px] text-white/[0.07] leading-none pointer-events-none">
-					BRIXTON
-				</div>
-				<p className="text-[9px] tracking-[0.3em] uppercase text-white/60 font-bold mb-2">Pop-Up Stall</p>
-				<h3 className="font-[family-name:var(--font-fraunces)] font-bold text-[22px] text-white mb-3.5">Brixton Market, SW9</h3>
-				<div className="flex gap-2.5 items-start mb-2">
-					<span className="text-[13px] mt-0.5">📍</span>
-					<span className="text-[12px] text-white/65 leading-[1.5]">Brixton Market, London SW9</span>
-				</div>
-				<div className="flex gap-2.5 items-start mb-2">
-					<span className="text-[13px] mt-0.5">📅</span>
-					<span className="text-[12px] text-white/65 leading-[1.5]">Dates announced on Instagram — follow us so you never miss out</span>
-				</div>
-				<div className="flex gap-2.5 items-start">
-					<span className="text-[13px] mt-0.5">⏰</span>
-					<span className="text-[12px] text-white/65 leading-[1.5]">10am – 6pm when we&apos;re live</span>
-				</div>
 			</div>
 
 		</section>

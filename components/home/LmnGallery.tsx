@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 const IMGS = [
 	{ src: '/stall/stall.png',          alt: 'Brixton stall', wide: true  },
@@ -27,6 +28,15 @@ export default function LmnGallery() {
 					</div>
 				))}
 			</div>
+
+			<Link href="/stall" className="lmn-rev mx-6 mt-5 flex items-center gap-3 bg-[rgba(194,123,26,0.1)] border border-[rgba(194,123,26,0.18)] rounded-full px-5 py-3.5 no-underline">
+				<span className="text-[18px]">🏪</span>
+				<div>
+					<div className="text-[12px] font-bold text-lmn-tx">Brixton Market, SW9</div>
+					<div className="text-[11px] text-lmn-t">See stall info & dates</div>
+				</div>
+				<span className="ml-auto text-lmn-t opacity-50 text-[16px]">›</span>
+			</Link>
 		</section>
 	)
 }
