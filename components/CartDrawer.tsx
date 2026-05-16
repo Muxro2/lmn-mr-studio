@@ -1,9 +1,9 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
 import { useCartStore } from '@/store/cartStore'
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
+import { createCart } from '@/lib/shopify'
 
 export default function LmnCartDrawer() {
 	const { items, drawerOpen, setDrawerOpen, removeItem, totalItems } = useCartStore()
@@ -11,6 +11,7 @@ export default function LmnCartDrawer() {
 	const startY = useRef(0)
 	const currentY = useRef(0)
 	const isDragging = useRef(false)
+	const [loading, setLoading] = useState(false)
 
 	// lock body scroll when drawer is open
 	useEffect(() => {
@@ -36,11 +37,30 @@ export default function LmnCartDrawer() {
 		return sum + price * i.quantity
 	}, 0)
 
+	const handleCheckout = async () => {
+		setLoading(true)
+		try {
+			const lines = items
+				.filter((item) => item.variantId)
+				.map((item) => ({
+					merchandiseId: item.variantId,
+					quantity: item.quantity,
+				}))
+			const cart = await createCart(lines)
+			if (cart?.checkoutUrl) {
+				window.location.href = cart.checkoutUrl
+			}
+		} catch (err) {
+			console.error('Checkout error:', err)
+		} finally {
+			setLoading(false)
+		}
+	}
+
 	const onTouchStart = (e: React.TouchEvent) => {
 		startY.current = e.touches[0].clientY
 		currentY.current = 0
 		isDragging.current = true
-		// cut transition so it follows finger instantly
 		if (drawerRef.current) drawerRef.current.style.transition = 'none'
 	}
 
@@ -49,7 +69,6 @@ export default function LmnCartDrawer() {
 		const delta = e.touches[0].clientY - startY.current
 		currentY.current = delta
 		if (delta > 0 && drawerRef.current) {
-			// resistance: feels natural, slows slightly at large distances
 			const resistance = Math.pow(delta, 0.85)
 			drawerRef.current.style.transform = `translateX(-50%) translateY(${resistance}px)`
 		}
@@ -58,7 +77,6 @@ export default function LmnCartDrawer() {
 	const onTouchEnd = () => {
 		isDragging.current = false
 		if (!drawerRef.current) return
-		// spring release
 		drawerRef.current.style.transition = 'transform 0.5s cubic-bezier(0.32, 0.72, 0, 1)'
 		if (currentY.current > 80) {
 			drawerRef.current.style.transform = 'translateX(-50%) translateY(100%)'
@@ -152,13 +170,13 @@ export default function LmnCartDrawer() {
 								£{subtotal.toFixed(2)}
 							</span>
 						</div>
-						<Link
-							href="#order"
-							onClick={() => setDrawerOpen(false)}
-							className="block w-full bg-[#E8A020] text-white font-bold text-[12px] tracking-[0.14em] uppercase py-4 rounded-full text-center no-underline"
+						<button
+							onClick={handleCheckout}
+							disabled={loading}
+							className="block w-full bg-[#E8A020] text-white font-bold text-[12px] tracking-[0.14em] uppercase py-4 rounded-full text-center disabled:opacity-50 transition-opacity"
 						>
-							Checkout via Instagram
-						</Link>
+							{loading ? 'Loading...' : 'Checkout'}
+						</button>
 						<button
 							onClick={() => setDrawerOpen(false)}
 							className="block w-full mt-2.5 text-[#2A1800] font-bold text-[12px] tracking-[0.14em] uppercase py-3 text-center"

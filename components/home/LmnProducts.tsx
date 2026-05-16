@@ -1,26 +1,46 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { getProductByHandle } from '@/lib/shopify'
 
-const PRODUCTS = [
+const PRODUCT_CONTENT = [
 	{
 		slug: 'hair-oil',
-		name: ['Hair', 'Oil'], sub: 'Growth & Moisture', vol: '120ml', price: '£12',
-		img: '/products/hairOil.png', alt: 'Hair Oil – Growth & Moisture',
+		name: ['Hair', 'Oil'],
+		sub: 'Growth & Moisture',
+		vol: '120ml',
+		fallbackPrice: '£12.00',
+		fallbackImg: '/products/hairOil.png',
 		benefits: ['Soothes dry, itchy scalp', 'Reduces breakage', 'Boosts hair growth', 'Lightweight, non-greasy'],
 		bannerHeight: 'min-h-[320px]',
 		imgHeight: 'h-[320px]',
 	},
 	{
 		slug: 'hair-butter',
-		name: ['Hair', 'Butter'], sub: 'Length & Retention', vol: '250ml', price: '£14',
-		img: '/products/hairButter.png', alt: 'Hair Butter – Length & Retention',
+		name: ['Hair', 'Butter'],
+		sub: 'Length & Retention',
+		vol: '250ml',
+		fallbackPrice: '£14.00',
+		fallbackImg: '/products/hairButter.png',
 		benefits: ['Softens & smooths', 'No greasy feeling', 'Organic herbs & butters', 'Seals in moisture'],
 		bannerHeight: 'min-h-[240px]',
 		imgHeight: 'h-[240px]',
 	},
 ]
 
-export default function LmnProducts() {
+export default async function LmnProducts() {
+	// fetch both products from Shopify in parallel
+	const shopifyProducts = await Promise.all(
+		PRODUCT_CONTENT.map((p) => getProductByHandle(p.slug))
+	)
+
+	const products = PRODUCT_CONTENT.map((p, i) => ({
+		...p,
+		price: shopifyProducts[i]
+			? `£${parseFloat(shopifyProducts[i].variants.edges[0].node.price.amount).toFixed(2)}`
+			: p.fallbackPrice,
+		img: shopifyProducts[i]?.images.edges[0]?.node.url ?? p.fallbackImg,
+	}))
+
 	return (
 		<section id="products" className="bg-[#FFFDF5] pt-[68px] pb-[76px] overflow-hidden">
 			<div className="lmn-rev px-6 pb-11">
@@ -30,13 +50,11 @@ export default function LmnProducts() {
 				</h2>
 			</div>
 
-			{PRODUCTS.map((p) => (
-				<div key={p.alt} className="lmn-rev mb-14 relative overflow-hidden">
-
+			{products.map((p) => (
+				<div key={p.slug} className="lmn-rev mb-14 relative overflow-hidden">
 					<div className={`ml-6 rounded-l-lg bg-[#E8A020] relative overflow-hidden ${p.bannerHeight}`}>
 						<div className="absolute -top-[60px] -right-[60px] w-[200px] h-[200px] rounded-full bg-white/[0.12] pointer-events-none" />
 						<div className="absolute -bottom-[40px] -left-[40px] w-[140px] h-[140px] rounded-full bg-[rgba(194,123,26,0.15)] pointer-events-none" />
-
 						<div className="flex items-end">
 							<div className="p-7 flex-1">
 								<div className="font-[family-name:var(--font-fraunces)] font-black italic text-[48px] text-white leading-[0.9] mb-1.5 relative z-[1]">
@@ -46,7 +64,7 @@ export default function LmnProducts() {
 								<span className="inline-block bg-white/20 text-white text-[9px] font-bold tracking-[0.1em] px-3 py-[5px] rounded-full relative z-[1]">{p.vol}</span>
 							</div>
 							<div className={`relative w-[140px] ${p.imgHeight} shrink-0 z-[1]`}>
-								<Image src={p.img} alt={p.alt} fill className="object-contain object-bottom" />
+								<Image src={p.img} alt={p.name.join(' ')} fill className="object-contain object-bottom" />
 							</div>
 						</div>
 					</div>
@@ -64,7 +82,6 @@ export default function LmnProducts() {
 							View Product
 						</Link>
 					</div>
-
 				</div>
 			))}
 		</section>

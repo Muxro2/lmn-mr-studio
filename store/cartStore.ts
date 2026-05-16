@@ -7,6 +7,7 @@ type CartItem = {
 	volume: string
 	img: string
 	quantity: number
+	variantId: string  // ← new
 }
 
 type CartStore = {
