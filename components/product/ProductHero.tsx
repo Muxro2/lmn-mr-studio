@@ -17,6 +17,7 @@ export default function LmnProductHero({ product }: { product: Product }) {
 			price: product.price,
 			volume: product.volume,
 			img: product.images[0],
+			variantId: product.variantId
 		})
 		setAdded(true)
 		setTimeout(() => setAdded(false), 2500)
