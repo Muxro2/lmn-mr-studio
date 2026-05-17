@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import LmnNav from '@/components/home/LmnNav'
 import LmnFooter from '@/components/home/LmnFooter'
 
@@ -109,6 +110,32 @@ export default function StallPage() {
           Shop All Products
         </Link>
       </section>
+
+      {/* GALLERY */}
+<section className="bg-[#F5E8BE] py-10 overflow-hidden">
+  <div className="lmn-rev px-6 pb-5">
+    <p className="text-[9px] tracking-[0.35em] uppercase font-bold text-[#C27B1A] mb-3">Past Stalls</p>
+    <h2 className="font-[family-name:var(--font-fraunces)] font-black text-[28px] text-[#2A1800] leading-[1.05]">
+      See us<br /><em className="italic text-[#E8A020]">in action.</em>
+    </h2>
+  </div>
+  <div className="lmn-rev flex gap-2.5 px-6 overflow-x-auto [scroll-snap-type:x_mandatory] [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+    {[
+      { src: '/stall/stall.png',          alt: 'Brixton stall'      },
+      { src: '/stall/openButter.png',     alt: 'Hair butter'        },
+      { src: '/stall/productDisplay.png', alt: 'Products on display' },
+      { src: '/products/hairOil.png',     alt: 'Hair oil'           },
+    ].map((img) => (
+      <div
+        key={img.src}
+        className="shrink-0 w-[220px] h-[280px] rounded-2xl overflow-hidden relative [scroll-snap-align:start]"
+      >
+        <Image src={img.src} alt={img.alt} fill sizes="220px" className="object-cover" />
+      </div>
+    ))}
+  </div>
+</section>
+
 
       {/* Instagram CTA */}
       <section className="bg-[#E8A020] px-6 py-[56px] relative overflow-hidden before:content-[''] before:absolute before:-top-[100px] before:-right-[100px] before:w-[350px] before:h-[350px] before:rounded-full before:bg-white/[0.08] before:pointer-events-none">
