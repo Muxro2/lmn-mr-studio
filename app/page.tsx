@@ -1,5 +1,5 @@
 
-
+import LmnThemeColor from '@/components/home/LmnThemeColor'
 import LmnReveal from '@/components/home/LmnReveal'
 import LmnNav from '@/components/home/LmnNav'
 import LmnHero from '@/components/home/LmnHero'
@@ -17,6 +17,7 @@ export default function Page() {
 
   return (
     <main className="lmn-grain font-[family-name:var(--font-syne)] bg-[#FFFDF5] text-[#2A1800] overflow-x-hidden max-w-[430px] mx-auto relative">
+      <LmnThemeColor />
       <LmnReveal />
       <LmnNav />
       <LmnHero />

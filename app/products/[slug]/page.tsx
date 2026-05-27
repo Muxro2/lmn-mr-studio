@@ -20,34 +20,35 @@ const PRODUCT_CONTENT: Record<string, {
 	'hair-oil': {
 		subtitle: 'Growth & Moisture',
 		volume: '120ml',
-		description: 'A lightweight, golden blend of natural oils crafted to nourish your scalp and fuel hair growth from root to tip. Free from sulphates, parabens, and synthetic additives.',
-		ingredients: 'Sunflower Oil, Castor Oil, Rosemary Extract, Peppermint Oil, Vitamin E, Lavender Essential Oil',
+		description: 'A handmade golden blend of natural oils crafted to nourish your scalp and fuel hair growth from root to tip. Versatile enough to use as a scalp oil, hair sealer, or deep treatment.',
+		ingredients: 'Avocado oil, castor oil, jojoba oil, black seed oil, coconut oil, rosemary oil, peppermint oil, amla powder, hibiscus leaves & fenugreek',
 		howToUse: [
-			'Section your hair and apply a few drops directly to the scalp.',
-			'Massage in circular motions for 2–3 minutes to stimulate circulation.',
-			'Work any excess oil through the lengths of your hair.',
-			'Use 2–3 times per week for best results.',
+			'Scalp oil: Apply 2–3x a week and massage in.',
+			'Hair sealer: Use on damp hair after moisturising to lock it all in.',
+			'Pre-poo or hot oil treatment: Warm slightly and massage into scalp and strands before washing, then cover with a cap for 20+ minutes for a deep treatment.',
 		],
-		tags: ['Growth', 'Moisture', 'Scalp Care', 'Lightweight'],
-		benefits: ['Soothes dry, itchy scalp', 'Reduces breakage', 'Boosts hair growth', 'Lightweight, non-greasy'],
+		tags: ['Growth', 'Moisture', 'Scalp Care', 'Handmade'],
+		benefits: ['Stimulates scalp circulation', 'Seals in moisture', 'Strengthens & reduces breakage', 'Handmade with natural ingredients'],
 		relatedSlug: 'hair-butter',
 	},
 	'hair-butter': {
 		subtitle: 'Length & Retention',
 		volume: '250ml',
-		description: 'A rich, whipped butter that softens and smooths your strands without leaving them feeling heavy or greasy. Packed with organic butters and herbs.',
-		ingredients: 'Shea Butter, Mango Butter, Coconut Oil, Aloe Vera Extract, Rosemary Oil, Castor Oil, Vitamin E',
+		description: 'A rich, whipped butter packed with natural butters, oils, and herbs to deeply moisturise and soften your strands. Perfect for wash days and in-between re-hydration.',
+		ingredients: 'Shea butter, mango butter, jojoba oil, avocado oil, glycerin, coconut oil, beeswax, fenugreek, moriga, hibiscus & amla powder',
 		howToUse: [
-			'Apply to freshly washed, damp hair for best absorption.',
-			'Scoop a small amount and warm between your palms.',
-			'Work through sections from mid-length to ends.',
-			'Style as usual. Use daily or as a leave-in treatment.',
+			'For best results, use on damp clean hair.',
+			'Rub between dry palms before applying liberally through damp hair.',
+			'Brush through from root to tip to distribute product evenly.',
+			'Style as desired.',
+			'Can also be used to re-hydrate in between wash days.',
 		],
-		tags: ['Moisture Seal', 'Length Retention', 'Softening', 'No Grease'],
-		benefits: ['Softens & smooths', 'No greasy feeling', 'Organic herbs & butters', 'Seals in moisture'],
+		tags: ['Moisture Seal', 'Length Retention', 'Softening', 'Wash Day'],
+		benefits: ['Deeply moisturises & softens', 'Seals in hydration', 'Enriched with herbs & butters', 'Great for in-between wash days'],
 		relatedSlug: 'hair-oil',
 	},
 }
+
 
 export type Product = {
 	slug: string
@@ -79,7 +80,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 		name: shopifyProduct?.title ?? slug.replace('-', ' '),
 		price: shopifyProduct
 			? `£${parseFloat(shopifyProduct.variants.edges[0].node.price.amount).toFixed(2)}`
-			: content.volume === '120ml' ? '£12.00' : '£14.00',
+			: content.volume === '120ml' ? '£10.00' : '£12.00',
 		images: shopifyProduct
 			? shopifyProduct.images.edges.map((e: any) => e.node.url)
 			: [`/products/${slug === 'hair-oil' ? 'hairOil' : 'hairButter'}.png`],
@@ -100,7 +101,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
 	return (
 		<main className="lmn-grain font-[family-name:var(--font-syne)] bg-[#FFFDF5] text-[#2A1800] overflow-x-hidden max-w-[430px] mx-auto relative">
-			<LmnNav />
+			<LmnNav forceOpaque/>
 			<LmnProductHero product={product} />
 			<LmnProductDetails product={product} />
 			<LmnProductReviews product={product} />
