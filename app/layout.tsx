@@ -28,7 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head>
         <meta name="theme-color" content="#C27B1A" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
+        
 
   <meta name="apple-mobile-web-app-title" content="Love My Natural" />
   <link rel="manifest" href="/manifest.json" />
