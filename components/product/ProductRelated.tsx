@@ -12,7 +12,7 @@ export default function LmnProductRelated({ product }: { product: Product }) {
 
 			<Link href={`/products/${product.slug}`} className="flex items-center gap-4 bg-[#FBF4DC] border border-[rgba(194,123,26,0.15)] rounded-xl p-4 no-underline active:scale-[0.98] transition-transform duration-150">
 				<div className="relative w-20 h-20 rounded-lg overflow-hidden bg-[#F5E8BE] shrink-0">
-					<Image src={product.images[0]} alt={product.name} fill className="object-contain p-2" />
+					<Image src={product.images[0]} alt={product.name} fill sizes="80px" className="object-contain p-2" />
 				</div>
 				<div className="flex-1">
 					<p className="text-[9px] tracking-[0.25em] uppercase font-bold text-[#C27B1A] mb-1">{product.subtitle}</p>

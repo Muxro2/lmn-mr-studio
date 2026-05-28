@@ -32,7 +32,6 @@ export default function LmnNav({ forceOpaque = false }: { forceOpaque?: boolean 
 		return () => window.removeEventListener('scroll', fn)
 	}, [forceOpaque])
 
-
  const handleOrderClick = () => {
 	 if (totalItems > 0) {
 		 setDrawerOpen(true)
@@ -47,27 +46,34 @@ export default function LmnNav({ forceOpaque = false }: { forceOpaque?: boolean 
 	 <>
 		 <nav
 			 ref={ref}
-			 className="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] z-[200] flex justify-between items-center px-5 py-3.5 transition-all duration-300"
+			 className="fixed top-0 left-0 right-0 z-[200] flex justify-center px-5 md:px-8 py-3.5 transition-all duration-300"
 		 >
-			 <Link href="/" className="nav-logo font-[family-name:var(--font-fraunces)] font-black text-[13px] text-white tracking-[0.04em] uppercase leading-tight [text-shadow:0_1px_4px_rgba(0,0,0,0.25)] no-underline">
-				Love My Natural
-				<small className="block font-[family-name:var(--font-syne)] text-[8px] font-semibold tracking-[0.28em] uppercase text-white/70 not-italic">
-					Self Care
-				</small>
-			 </Link>
+			 <div className="w-full max-w-7xl flex justify-between items-center">
+				 <Link href="/" className="nav-logo font-[family-name:var(--font-fraunces)] font-black text-[13px] text-white tracking-[0.04em] uppercase leading-tight [text-shadow:0_1px_4px_rgba(0,0,0,0.25)] no-underline">
+					Love My Natural
+					<small className="block font-[family-name:var(--font-syne)] text-[8px] font-semibold tracking-[0.28em] uppercase text-white/70 not-italic">
+						Self Care
+					</small>
+				 </Link>
 
+				 <div className="hidden md:flex items-center gap-8">
+					 <Link href="/#products" className="nav-logo text-white text-[10px] font-bold tracking-[0.14em] uppercase no-underline opacity-80 hover:opacity-100 transition-opacity">Shop</Link>
+					 <Link href="/story" className="nav-logo text-white text-[10px] font-bold tracking-[0.14em] uppercase no-underline opacity-80 hover:opacity-100 transition-opacity">Our Story</Link>
+					 <Link href="/stall" className="nav-logo text-white text-[10px] font-bold tracking-[0.14em] uppercase no-underline opacity-80 hover:opacity-100 transition-opacity">Find Us</Link>
+				 </div>
 
-			 <button
-				 onClick={handleOrderClick}
-				 className="flex items-center gap-2 bg-[#E8A020] text-white font-[family-name:var(--font-syne)] text-[10px] font-bold tracking-[0.14em] uppercase px-4 py-2.5 rounded-full transition-all duration-300"
-			 >
-				 {totalItems > 0 ? 'Basket' : 'Order Now'}
-				 {totalItems > 0 && (
-					 <span className="bg-white text-[#E8A020] text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center leading-none">
-						 {totalItems}
-					 </span>
-				 )}
-			 </button>
+				 <button
+					 onClick={handleOrderClick}
+					 className="flex items-center gap-2 bg-[#E8A020] text-white font-[family-name:var(--font-syne)] text-[10px] font-bold tracking-[0.14em] uppercase px-4 py-2.5 rounded-full transition-all duration-300"
+				 >
+					 {totalItems > 0 ? 'Basket' : 'Order Now'}
+					 {totalItems > 0 && (
+						 <span className="bg-white text-[#E8A020] text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center leading-none">
+							 {totalItems}
+						 </span>
+					 )}
+				 </button>
+			 </div>
 		 </nav>
 
 		 <CartDrawer />

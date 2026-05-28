@@ -1,40 +1,37 @@
 import type { Metadata } from "next"
-import { DM_Sans, Playfair_Display } from "next/font/google"
+import { Syne, Fraunces } from "next/font/google"
 import "./globals.css"
 
-const dmSans = DM_Sans({
+const syne = Syne({
   subsets: ["latin"],
-  variable: "--font-body",
-  weight: ["300", "400", "500"],
+  variable: "--font-syne",
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
 })
 
-const playfair = Playfair_Display({
+const fraunces = Fraunces({
   subsets: ["latin"],
-  variable: "--font-display",
-  weight: ["700", "900"],
+  variable: "--font-fraunces",
+  weight: ["700", "800", "900"],
   style: ["normal", "italic"],
+  display: "swap",
 })
-
 
 export const metadata: Metadata = {
   title: 'Love My Natural Self Care',
   description: 'Natural hair care. Handcrafted in South London.',
-  themeColor: '#C27B1A',
 }
-
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
         <meta name="theme-color" content="#C27B1A" />
-        
-
-  <meta name="apple-mobile-web-app-title" content="Love My Natural" />
-  <link rel="manifest" href="/manifest.json" />
-  <link rel="apple-touch-icon" href="/icon-512.png" />
+        <meta name="apple-mobile-web-app-title" content="Love My Natural" />
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="apple-touch-icon" href="/icon-512.png" />
       </head>
-      <body className={`${dmSans.variable} ${playfair.variable}`}>
+      <body className={`${syne.variable} ${fraunces.variable}`}>
         {children}
       </body>
     </html>

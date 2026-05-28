@@ -5,6 +5,8 @@ import { useCartStore } from '@/store/cartStore'
 import { useRef, useEffect, useState } from 'react'
 import { createCart } from '@/lib/shopify'
 
+const isDesktop = () => typeof window !== 'undefined' && window.matchMedia('(min-width: 768px)').matches
+
 export default function LmnCartDrawer() {
 	const { items, drawerOpen, setDrawerOpen, removeItem, totalItems } = useCartStore()
 	const drawerRef = useRef<HTMLDivElement>(null)
@@ -23,13 +25,25 @@ export default function LmnCartDrawer() {
 		return () => { document.body.style.overflow = '' }
 	}, [drawerOpen])
 
-	// smooth open/close
+	// set correct initial closed transform based on viewport
+	useEffect(() => {
+		if (!drawerRef.current) return
+		drawerRef.current.style.transform = isDesktop()
+			? 'translateX(100%)'
+			: 'translateX(-50%) translateY(100%)'
+	}, [])
+
+	// smooth open/close — different axis per viewport
 	useEffect(() => {
 		if (!drawerRef.current) return
 		drawerRef.current.style.transition = 'transform 0.5s cubic-bezier(0.32, 0.72, 0, 1)'
-		drawerRef.current.style.transform = drawerOpen
-			? 'translateX(-50%) translateY(0)'
-			: 'translateX(-50%) translateY(100%)'
+		if (isDesktop()) {
+			drawerRef.current.style.transform = drawerOpen ? 'translateX(0)' : 'translateX(100%)'
+		} else {
+			drawerRef.current.style.transform = drawerOpen
+				? 'translateX(-50%) translateY(0)'
+				: 'translateX(-50%) translateY(100%)'
+		}
 	}, [drawerOpen])
 
 	const subtotal = items.reduce((sum, i) => {
@@ -57,7 +71,9 @@ export default function LmnCartDrawer() {
 		}
 	}
 
+	// touch drag — mobile only
 	const onTouchStart = (e: React.TouchEvent) => {
+		if (isDesktop()) return
 		startY.current = e.touches[0].clientY
 		currentY.current = 0
 		isDragging.current = true
@@ -65,7 +81,7 @@ export default function LmnCartDrawer() {
 	}
 
 	const onTouchMove = (e: React.TouchEvent) => {
-		if (!isDragging.current) return
+		if (!isDragging.current || isDesktop()) return
 		const delta = e.touches[0].clientY - startY.current
 		currentY.current = delta
 		if (delta > 0 && drawerRef.current) {
@@ -97,15 +113,15 @@ export default function LmnCartDrawer() {
 				}`}
 			/>
 
-			{/* drawer */}
+			{/* drawer — bottom sheet on mobile, right panel on desktop */}
 			<div
 				ref={drawerRef}
 				style={{ transform: 'translateX(-50%) translateY(100%)', transition: 'transform 0.5s cubic-bezier(0.32, 0.72, 0, 1)' }}
-				className="fixed bottom-0 left-1/2 w-full max-w-[430px] z-[400] bg-[#FFFDF5] rounded-t-[20px]"
+				className="fixed bottom-0 left-1/2 w-full max-w-[430px] z-[400] bg-[#FFFDF5] rounded-t-[20px] md:left-auto md:right-0 md:top-0 md:bottom-0 md:max-w-[440px] md:h-full md:rounded-none md:rounded-l-[20px] flex flex-col"
 			>
-				{/* handle */}
+				{/* handle — mobile only */}
 				<div
-					className="flex justify-center items-center py-4 cursor-grab active:cursor-grabbing"
+					className="md:hidden flex justify-center items-center py-4 cursor-grab active:cursor-grabbing"
 					onTouchStart={onTouchStart}
 					onTouchMove={onTouchMove}
 					onTouchEnd={onTouchEnd}
@@ -130,7 +146,7 @@ export default function LmnCartDrawer() {
 				</div>
 
 				{/* items */}
-				<div className="px-6 py-4 max-h-[40svh] overflow-y-auto">
+				<div className="px-6 py-4 flex-1 overflow-y-auto">
 					{items.length === 0 ? (
 						<p className="text-[13px] text-[#A06828] text-center py-8">Your basket is empty.</p>
 					) : (

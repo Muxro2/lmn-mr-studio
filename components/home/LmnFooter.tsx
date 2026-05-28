@@ -5,8 +5,8 @@ const LINKS = [
 	{ label: 'Hair Oil', href: '/products/hair-oil' },
 	{ label: 'Hair Butter', href: '/products/hair-butter' },
 	{ label: 'Brixton Stall', href: '/stall' },
-	{ label: 'Instagram', href: 'https://instagram.com/lovemynatural.selfcare', external: true },
-	{ label: 'TikTok', href: 'https://tiktok.com/@lovemynatural', external: true },
+	{ label: 'Instagram', href: 'https://instagram.com/lovemynaturaluk', external: true },
+	{ label: 'TikTok', href: 'https://tiktok.com/@lovemynaturaluk', external: true },
 ]
 
 export default function LmnFooter() {

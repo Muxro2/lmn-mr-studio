@@ -482,10 +482,10 @@ export default function LoveMyNatural() {
 					</div>
 					<div className="lmn-stall-box lmn-rev">
 						<p className="lmn-stall-box__label">Pop-Up Stall</p>
-						<h3 className="lmn-stall-box__title">Brixton Market, SW9</h3>
-						<div className="lmn-stall-row"><span className="lmn-stall-row__icon">📍</span><span className="lmn-stall-row__text">Brixton Market, London SW9</span></div>
+						<h3 className="lmn-stall-box__title">Pop Brixton, SW9</h3>
+						<div className="lmn-stall-row"><span className="lmn-stall-row__icon">📍</span><span className="lmn-stall-row__text">Pop Brixton, London SW9</span></div>
 						<div className="lmn-stall-row"><span className="lmn-stall-row__icon">📅</span><span className="lmn-stall-row__text">Dates announced on Instagram — follow us so you never miss out</span></div>
-						<div className="lmn-stall-row"><span className="lmn-stall-row__icon">⏰</span><span className="lmn-stall-row__text">10am – 6pm when we&apos;re live</span></div>
+						<div className="lmn-stall-row"><span className="lmn-stall-row__icon">⏰</span><span className="lmn-stall-row__text">12pm – 5pm when we&apos;re live</span></div>
 					</div>
 				</section>
 

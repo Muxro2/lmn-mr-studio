@@ -100,7 +100,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 	} : null
 
 	return (
-		<main className="lmn-grain font-[family-name:var(--font-syne)] bg-[#FFFDF5] text-[#2A1800] overflow-x-hidden max-w-[430px] mx-auto relative">
+		<main className="lmn-grain font-[family-name:var(--font-syne)] bg-[#FFFDF5] text-[#2A1800] overflow-x-hidden relative">
 			<LmnNav forceOpaque/>
 			<LmnProductHero product={product} />
 			<LmnProductDetails product={product} />

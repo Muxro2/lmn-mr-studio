@@ -16,7 +16,7 @@ export default function Page() {
   
 
   return (
-    <main className="lmn-grain font-[family-name:var(--font-syne)] bg-[#FFFDF5] text-[#2A1800] overflow-x-hidden max-w-[430px] mx-auto relative">
+    <main className="lmn-grain font-[family-name:var(--font-syne)] bg-[#FFFDF5] text-[#2A1800] overflow-x-hidden relative">
       <LmnThemeColor />
       <LmnReveal />
       <LmnNav />
